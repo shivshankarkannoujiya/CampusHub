@@ -11,6 +11,13 @@ export const SUCCESS_MESSAGES = {
         FETCHED: 'Users fetched successfully',
     },
 
+    ENROLLMENT: {
+        ENROLLED: "Student enrolled successfully",
+        ENROLLED_STUDENT_FETCHED: "Enrolled students fetched successfully",
+        ENROLLED_COURSES_FETCHED: "Enrolled courses fetched successfully",
+
+    },
+
     ANNOUNCEMENT: {
         CREATED: 'Announcement created successfully',
         FETCHED: 'Announcements fetched successfully',

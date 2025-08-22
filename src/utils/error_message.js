@@ -9,10 +9,15 @@ export const ERROR_MESSAGES = {
         ROLE_NOT_FOUND: 'User role not found in request',
     },
 
+    ENROLLMENT: {
+        ALREADY_ENROLLED: 'This student is already enrolled in this course',
+        NO_ENROLLMENTS: 'No students found for this course',
+        STUDENT_NOT_ENROLLED_ANY_COURSE: "No courses found for this student"
+    },
+
     USER: {
         ALREADY_EXISTS: 'User already registered with this email',
         NOT_FOUND: 'User not found',
-        ROLE_UPDATE_FORBIDDEN: 'Cannot change role for this user',
     },
 
     ANNOUNCEMENT: {
