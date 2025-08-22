@@ -1,17 +1,24 @@
-import { ApiError } from '../utils/api-error.js';
-import { asyncHandler } from '../utils/async-handler.js';
+import {
+    asyncHandler,
+    ApiError,
+    STATUS_CODES,
+    ERROR_MESSAGES,
+} from '../utils/index.js';
 
 export const validatePermission = (roles = []) =>
     asyncHandler(async (req, _, next) => {
         const userRole = req.user?.role;
         if (!userRole) {
-            throw new ApiError(401, 'User role not found in request');
+            throw new ApiError(
+                STATUS_CODES.UNAUTHORIZED,
+                ERROR_MESSAGES.AUTH.ROLE_NOT_FOUND
+            );
         }
 
         if (!roles.includes(userRole)) {
             throw new ApiError(
-                403,
-                'You do not have permission to perform this action'
+                STATUS_CODES.FORBIDDEN,
+                ERROR_MESSAGES.AUTH.FORBIDDEN
             );
         }
 

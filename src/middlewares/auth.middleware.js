@@ -1,16 +1,23 @@
 import { User } from '../models/users.model.js';
-import { ApiError } from '../utils/api-error.js';
-import { asyncHandler } from '../utils/async-handler.js';
+import {
+    asyncHandler,
+    ApiError,
+    STATUS_CODES,
+    ERROR_MESSAGES,
+} from '../utils/index.js';
 
 import jwt from 'jsonwebtoken';
 
-const authMiddleware = asyncHandler(async (req, res, next) => {
+const authMiddleware = asyncHandler(async (req, _, next) => {
     const token =
         req.cookies?.accessToken ||
         req.header('Authorization')?.replace('Bearer ', '');
 
     if (!token) {
-        throw new ApiError(401, 'Unauthorized access');
+        throw new ApiError(
+            STATUS_CODES.UNAUTHORIZED,
+            ERROR_MESSAGES.AUTH.UNAUTHORIZED
+        );
     }
 
     try {
@@ -19,7 +26,10 @@ const authMiddleware = asyncHandler(async (req, res, next) => {
             '-password -refreshToken'
         );
         if (!user) {
-            throw new ApiError(401, 'Invalid access token');
+            throw new ApiError(
+                STATUS_CODES.UNAUTHORIZED,
+                ERROR_MESSAGES.AUTH.UNAUTHORIZED
+            );
         }
         req.user = user;
         next();
@@ -28,15 +38,21 @@ const authMiddleware = asyncHandler(async (req, res, next) => {
 
         if (error.name === 'TokenExpiredError') {
             throw new ApiError(
-                401,
-                'Access token expired. Please refresh your token.'
+                STATUS_CODES.UNAUTHORIZED,
+                ERROR_MESSAGES.AUTH.TOKEN_EXPIRED
             );
         }
 
         if (error.name === 'JsonWebTokenError') {
-            throw new ApiError(401, 'Malformed or invalid token');
+            throw new ApiError(
+                STATUS_CODES.UNAUTHORIZED,
+                ERROR_MESSAGES.AUTH.INVALID_TOKEN
+            );
         }
-        throw new ApiError(401, 'Invalid token');
+        throw new ApiError(
+            STATUS_CODES.UNAUTHORIZED,
+            ERROR_MESSAGES.AUTH.UNAUTHORIZED
+        );
     }
 });
 

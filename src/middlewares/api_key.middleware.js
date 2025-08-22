@@ -1,32 +1,45 @@
 import { Apikey } from '../models/api_keys.model.js';
-import { ApiError } from '../utils/api-error.js';
-import { asyncHandler } from '../utils/async-handler.js';
+import {
+    asyncHandler,
+    ApiError,
+    STATUS_CODES,
+    ERROR_MESSAGES,
+} from '../utils/index.js';
 import crypto from 'crypto';
 
 const verifyAPI_KEY = asyncHandler(async (req, _, next) => {
     const api_key = req.headers['x-api-key'];
     if (!api_key) {
-        throw new ApiError(401, 'API Key missing');
+        throw new ApiError(
+            STATUS_CODES.UNAUTHORIZED,
+            ERROR_MESSAGES.AUTH.INVALID_API_KEY
+        );
     }
 
-    const heashedApiKey = crypto
+    const hashedApiKey = crypto
         .createHash('sha256')
         .update(api_key)
         .digest('hex');
 
     const existingApiKey = await Apikey.findOne({
-        keyHash: heashedApiKey,
+        keyHash: hashedApiKey,
         isActive: true,
     });
 
     if (!existingApiKey) {
-        throw new ApiError(401, 'Invalid or inactive API Key');
+        throw new ApiError(
+            STATUS_CODES.UNAUTHORIZED,
+            ERROR_MESSAGES.AUTH.INVALID_API_KEY
+        );
     }
 
-    if (existingApiKey.expiresAt <= new Date()) {
+    if (existingApiKey.expiresAt && existingApiKey.expiresAt <= new Date()) {
         existingApiKey.isActive = false;
         await existingApiKey.save();
-        throw new ApiError(401, 'API Key has expired');
+        throw new ApiError(
+            STATUS_CODES.UNAUTHORIZED,
+            ERROR_MESSAGES.AUTH.INVALID_API_KEY
+        );
     }
 
     req.apiKey = { user: existingApiKey.user, _id: existingApiKey._id };

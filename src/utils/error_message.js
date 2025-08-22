@@ -5,6 +5,8 @@ export const ERROR_MESSAGES = {
     FORBIDDEN: "You do not have permission to access this resource",
     INVALID_API_KEY: "API key is missing or invalid",
     TOKEN_EXPIRED: "Session expired, please login again",
+    INVALID_TOKEN: "Malformed or invalid token",
+    ROLE_NOT_FOUND: 'User role not found in request'
   },
 
   USER: {
