@@ -24,6 +24,7 @@ export const SUCCESS_MESSAGES = {
     COURSE: {
         CREATED: 'Course created successfully',
         FETCHED: 'Courses fetched successfully',
+        DELETED: "Course deleted successfully",
         MATERIAL_UPLOADED: 'Course material uploaded successfully',
         MATERIAL_FETCHED: 'Course materials fetched successfully',
     },
