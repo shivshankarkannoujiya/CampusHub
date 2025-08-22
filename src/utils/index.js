@@ -5,6 +5,7 @@ import { generateAccessAndRefreshToken } from './generateToken.js';
 import { ERROR_MESSAGES } from './error_message.js';
 import { STATUS_CODES } from './status_code.js';
 import { SUCCESS_MESSAGES } from './success_message.js';
+import { uploadOnCloudinary } from "./cloudinary.js";
 
 
 export {
@@ -14,5 +15,6 @@ export {
     generateAccessAndRefreshToken,
     ERROR_MESSAGES,
     STATUS_CODES,
-    SUCCESS_MESSAGES
+    SUCCESS_MESSAGES,
+    uploadOnCloudinary
 };

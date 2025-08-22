@@ -28,6 +28,8 @@ export const ERROR_MESSAGES = {
     COURSE: {
         NOT_FOUND: 'Course not found',
         ALREADY_EXISTS: 'Course already created with this title',
+        COURSE_MATERIAL_MISSING: 'Course material is missing',
+        MATERIAL_NOT_FOUND: 'Course material not found',
     },
 
     GENERAL: {
