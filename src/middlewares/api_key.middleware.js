@@ -15,7 +15,7 @@ const verifyAPI_KEY = asyncHandler(async (req, _, next) => {
         .digest('hex');
 
     const existingApiKey = await Apikey.findOne({
-        key: heashedApiKey,
+        keyHash: heashedApiKey,
         isActive: true,
     });
 

@@ -75,9 +75,7 @@ const loginUser = asyncHandler(async (req, res) => {
         );
     }
 
-    const user = await User.findOne({ email }).select(
-        '-password -refrershToken'
-    );
+    const user = await User.findOne({ email });
     if (!user) {
         new ApiError(STATUS_CODES.NOT_FOUND, ERROR_MESSAGES.USER.NOT_FOUND);
     }
@@ -94,6 +92,10 @@ const loginUser = asyncHandler(async (req, res) => {
         user._id
     );
 
+    const loggedInUser = await User.findById(user._id).select(
+        '-password -refreshToken'
+    );
+
     return res
         .status(STATUS_CODES.OK)
         .cookie('accessToken', accessToken, cookieOptions)
@@ -102,7 +104,7 @@ const loginUser = asyncHandler(async (req, res) => {
             new ApiResponse(
                 STATUS_CODES.OK,
                 {
-                    user: user,
+                    user: loggedInUser,
                     accessToken: accessToken,
                 },
                 SUCCESS_MESSAGES.AUTH.LOGGED_IN
@@ -110,8 +112,8 @@ const loginUser = asyncHandler(async (req, res) => {
         );
 });
 
-const gnerateApiKey = asyncHandler(async (req, res) => {
-    const rawApiKey = crypto.randomBytes(32).toString('hex');
+const generateApiKey = asyncHandler(async (req, res) => {
+    const rawApiKey = `sk_ch_${crypto.randomBytes(32).toString('hex')}`;
     const hashedApiKey = crypto
         .createHash('sha256')
         .update(rawApiKey)
@@ -170,4 +172,4 @@ const logoutUser = asyncHandler(async (req, res) => {
         );
 });
 
-export { registerUser, loginUser, gnerateApiKey, getCurrentUser, logoutUser };
+export { registerUser, loginUser, generateApiKey, getCurrentUser, logoutUser };
