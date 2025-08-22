@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { AvailablegradeValues } from '../utils/constant.js';
 
 const resultSchema = new mongoose.Schema(
     {
@@ -16,6 +17,7 @@ const resultSchema = new mongoose.Schema(
 
         grade: {
             type: String,
+            enum: AvailablegradeValues,
             required: true,
         },
 

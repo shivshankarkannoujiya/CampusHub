@@ -26,8 +26,10 @@ app.use(
 
 import authRouter from './routes/auth.routes.js';
 import announcementRouter from './routes/announcement.routes.js';
+import resultRouter from './routes/result.routes.js';
 
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/announcements', announcementRouter);
+app.use('/api/v1/results', resultRouter);
 
 export default app;
