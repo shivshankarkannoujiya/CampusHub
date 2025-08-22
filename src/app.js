@@ -25,7 +25,9 @@ app.use(
 );
 
 import authRouter from './routes/auth.routes.js';
+import announcementRouter from './routes/announcement.routes.js';
 
 app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/announcements', announcementRouter);
 
 export default app;
