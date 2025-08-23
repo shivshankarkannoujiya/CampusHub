@@ -44,6 +44,10 @@ export const SUCCESS_MESSAGES = {
         PAST_EVENT_FETCHED: 'Past events fetched successfully',
     },
 
+    ATTENDANCE: {
+        MARKED: "Attendance marked successfully"
+    },
+
     GENERAL: {
         SUCCESS: 'Operation completed successfully',
         HEALTHY: "Server is healthy 🚀",

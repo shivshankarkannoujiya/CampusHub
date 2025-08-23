@@ -1,12 +1,13 @@
 import mongoose from 'mongoose';
 
-const attendenceSchema = new mongoose.Schema(
+const attendanceSchema = new mongoose.Schema(
     {
         student: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'User',
             required: true,
         },
+
         course: {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Course',
@@ -16,16 +17,29 @@ const attendenceSchema = new mongoose.Schema(
         date: {
             type: Date,
             required: true,
+            set: (value) => new Date(new Date(value).setHours(0, 0, 0, 0)),
         },
 
         isPresent: {
             type: Boolean,
             default: false,
         },
+
+        markedBy: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+        },
+        
+        remarks: {
+            type: String,
+            trim: true,
+        },
     },
     { timestamps: true }
 );
 
-attendenceSchema.index({ student: 1, course: 1, date: 1 }, { unique: true });
+// Indexes
+attendanceSchema.index({ student: 1, course: 1, date: 1 }, { unique: true });
+attendanceSchema.index({ course: 1, date: 1 });
 
-export const Attendence = mongoose.model('Attendence', attendenceSchema);
+export const Attendance = mongoose.model('Attendance', attendanceSchema);
