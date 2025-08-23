@@ -1,4 +1,4 @@
-import { Attendence } from '../models/attendances.model.js';
+import { Attendance } from '../models/attendances.model.js';
 import {
     ApiError,
     ApiResponse,
@@ -20,7 +20,7 @@ const markAttendance = asyncHandler(async (req, res) => {
 
     const normalizeDate = new Date(new Date(date).setHours(0, 0, 0, 0));
 
-    const attendance = await Attendence.findOneAndUpdate(
+    const attendance = await Attendance.findOneAndUpdate(
         { student, course, date: normalizeDate },
         {
             student,
