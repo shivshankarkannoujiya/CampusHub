@@ -12,7 +12,7 @@ export const ERROR_MESSAGES = {
     ENROLLMENT: {
         ALREADY_ENROLLED: 'This student is already enrolled in this course',
         NO_ENROLLMENTS: 'No students found for this course',
-        STUDENT_NOT_ENROLLED_ANY_COURSE: "No courses found for this student"
+        STUDENT_NOT_ENROLLED_ANY_COURSE: 'No courses found for this student',
     },
 
     USER: {
@@ -35,6 +35,14 @@ export const ERROR_MESSAGES = {
         ALREADY_EXISTS: 'Course already created with this title',
         COURSE_MATERIAL_MISSING: 'Course material is missing',
         MATERIAL_NOT_FOUND: 'Course material not found',
+    },
+
+    EVENT: {
+        INVALID_DATE: 'Invalid date format. Use a valid ISO date string',
+        START_BEFORE_END: 'startTime must be earlier than endTime',
+        EVENT_NOT_FOUND: 'Event not found',
+        NO_UPCOMMING_EVENT: 'There is not upcomming events',
+        NO_PAST_EVENT: 'There is not upcomming events',
     },
 
     GENERAL: {

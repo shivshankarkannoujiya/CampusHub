@@ -36,6 +36,14 @@ export const SUCCESS_MESSAGES = {
         MATERIAL_FETCHED: 'Course materials fetched successfully',
     },
 
+    EVENT: {
+        CREATED: "Event created successfully",
+        FETCHED_ALL: 'Events fetched successfully',
+        FETCHED: 'Event fetched successfully',
+        UPCOMMING_EVENT_FETCHED: 'Upcoming events fetched successfully',
+        PAST_EVENT_FETCHED: 'Past events fetched successfully',
+    },
+
     GENERAL: {
         SUCCESS: 'Operation completed successfully',
         HEALTHY: "Server is healthy 🚀",
