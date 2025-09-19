@@ -25,18 +25,22 @@ app.use(
     })
 );
 
+import healthCheckRouter from './routes/health_check.routes.js';
 import authRouter from './routes/auth.routes.js';
 import announcementRouter from './routes/announcement.routes.js';
 import courseRouter from './routes/course.routes.js';
 import materialRouter from './routes/material.routes.js';
 import enrollmentRouter from './routes/enrollment.routes.js';
 import resultRouter from './routes/result.routes.js';
+import eventRouter from './routes/event.routes.js';
 
+app.use('/api/v1/health', healthCheckRouter);
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/announcements', announcementRouter);
 app.use('/api/v1/courses', courseRouter);
 app.use('/api/v1/materials', materialRouter);
 app.use('/api/v1/enrollments', enrollmentRouter);
 app.use('/api/v1/results', resultRouter);
+app.use('/api/v1/event', eventRouter);
 
 export default app;
